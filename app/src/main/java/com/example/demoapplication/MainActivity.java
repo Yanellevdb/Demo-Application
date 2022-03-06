@@ -21,27 +21,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button min= findViewById(R.id.min);
-        Button plus= findViewById(R.id.plus);
+            min=findViewById(R.id.min);
+            plus=findViewById(R.id.plus);
+            textpersonen=findViewById(R.id.textpersonen);
 
-        min.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextView textpersonen= findViewById(R.id.textpersonen);
-                textpersonen.setText(String.format("Pannenkoeken voor", number, "personen"));
+            update();
+
+            min.setOnClickListener(view ->
+            {
                 number--;
+                MainActivity.this.update();
+            });
 
-            }
-        });
+        plus.setOnClickListener(view ->
+            {
+                number--;
+                update();
+            });
+        }
 
-        plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextView textpersonen= findViewById(R.id.textpersonen);
-                textpersonen.setText(String.format("Pannenkoeken voor", number, "personen"));
-                number++;
-
-            }
-        });
+        void update(){
+            textpersonen.setText(String.format("Pannenkoeken voor", number, "personen"));
+            plus.setEnabled(number < 15);
+            min.setEnabled(number > 1);
+        }
     }
-}
